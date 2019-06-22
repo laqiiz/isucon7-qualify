@@ -722,6 +722,12 @@ func tRange(a, b int64) []int64 {
 
 func main() {
 	e := echo.New()
+
+	// logger
+	e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
+		Format: "method=${method}, uri=${uri}, status=${status}, latency_human=${latency_human}\n",
+	}))
+
 	funcs := template.FuncMap{
 		"add":    tAdd,
 		"xrange": tRange,
